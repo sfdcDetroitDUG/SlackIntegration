@@ -17,12 +17,12 @@ public with sharing class PublishBigWinToSlack {
     public static void postToSlack(List<Oppty> oppties) {
         Oppty o = oppties[0]; // If bulk, only post first to avoid overloading Slack channel
         Map<String,Object> msg = new Map<String,Object>();
-        msg.put('text', 'The following opportunity has been won! :\n' + o.opptyName + '\nAmmount: *' + o.amount + '*');
+        msg.put('text', 'The following opportunity has been won: \n' + o.opptyName + '\nAmmount: *$' + Integer.valueOf(o.amount) + '*');
         msg.put('mrkdwn', true);
         String body = JSON.serialize(msg); 
         System.enqueueJob(new QueueableSlackCall(slackURL, 'POST', body));
     }
-    
+
     public class QueueableSlackCall implements System.Queueable, Database.AllowsCallouts {
          
         private final String url;
@@ -45,4 +45,5 @@ public with sharing class PublishBigWinToSlack {
         }
  
     }
+    
 }
