@@ -9,7 +9,7 @@ public class QueueSlackMessage implements System.Queueable, Database.AllowsCallo
     public String title;
     @InvocableVariable(label='Message')
     public String message;
-    @InvocableVariable(label='Link')
+    @InvocableVariable(label='More Details')
     public String moreDetails;
   }
 
